@@ -2,8 +2,20 @@ from test_framework import generic_test
 
 
 def matrix_in_spiral_order(square_matrix):
-    # TODO - you fill in here.
-    return []
+    shift = [(0,1), (1, 0), (0, -1), (-1, 0)]
+    direction = x = y = 0
+    result = []
+    for _ in range(len(square_matrix)**2):
+        result.append(square_matrix[x][y])
+        square_matrix[x][y] = float('-inf')
+        next_x, next_y = x + shift[direction][0], y + shift[direction][1]
+        if (next_x not in range(len(square_matrix)) or
+            next_y not in range(len(square_matrix)) or
+            square_matrix[next_x][next_y] == float('-inf')):
+            direction = (direction+1)%4
+            next_x, next_y = x + shift[direction][0], y + shift[direction][1]
+        x, y = next_x, next_y
+    return result
 
 
 if __name__ == '__main__':

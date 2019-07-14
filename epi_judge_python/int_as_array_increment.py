@@ -2,8 +2,16 @@ from test_framework import generic_test
 
 
 def plus_one(A):
-    # TODO - you fill in here.
-    return []
+    for i in reversed(range(len(A))):
+        if A[i] + 1 < 10:
+            A[i] += 1
+            break
+        if i == 0:
+            A[i] = 1
+            A.append(0)
+        else:
+            A[i] = 0
+    return A
 
 
 if __name__ == '__main__':
