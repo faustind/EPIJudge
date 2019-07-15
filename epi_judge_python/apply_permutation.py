@@ -2,8 +2,10 @@ from test_framework import generic_test
 
 
 def apply_permutation(perm, A):
-    # TODO - you fill in here.
-    return
+    for i in range(len(A)):
+        while i != perm[i]:
+            A[perm[i]], A[i] = A[i], A[perm[i]]
+            perm[perm[i]], perm[i] = perm[i], perm[perm[i]]
 
 
 def apply_permutation_wrapper(perm, A):

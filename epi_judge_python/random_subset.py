@@ -6,11 +6,16 @@ from test_framework.random_sequence_checker import (
     compute_combination_idx, run_func_with_retries)
 from test_framework.test_utils import enable_executor_hook
 
-
+import random
 def random_subset(n, k):
-    # TODO - you fill in here.
-    return []
-
+    changed_map = dict()
+    for i in range(k):
+        r = random.randint(i, n-1)
+        random_idx_mapped = changed_map.get(r, r)
+        i_mapped = changed_map.get(i, i)
+        changed_map[r] = i_mapped
+        changed_map[i] = random_idx_mapped
+    return [changed_map[x] for x in range(k)]
 
 @enable_executor_hook
 def random_subset_wrapper(executor, n, k):
