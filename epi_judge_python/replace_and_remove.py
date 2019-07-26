@@ -5,8 +5,26 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def replace_and_remove(size, s):
-    # TODO - you fill in here.
-    return 0
+    count_a = 0
+    count_b = 0
+    for _, c in zip(range(size), s):
+        if c == 'a':
+            count_a += 1
+        elif c == 'b':
+            count_b += 1
+
+    resize = size - count_b + count_a
+
+    write_pos = resize - 1
+    for c in reversed(s[:size]):
+        if c == 'a':
+            s[write_pos-1] = s[write_pos] = 'd'
+            write_pos -= 2
+        elif c != 'b':
+            s[write_pos] = c
+            write_pos -= 1
+
+    return resize
 
 
 @enable_executor_hook
